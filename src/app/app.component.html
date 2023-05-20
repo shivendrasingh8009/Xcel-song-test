@@ -1,0 +1,108 @@
+
+
+
+<app-admin *ngIf="dataValue=='0';else song"></app-admin>
+
+<ng-template #song >
+<h1>Music Player</h1>
+
+<!-- ///////////////////////////////////table ///////////////////// -->
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col">Desc</th>
+        <th scope="col">image</th>
+        <th scope="col">Action</th>
+        <th scope="col">Action</th>
+        <th scope="col">Action</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let file of files  " >
+        <th scope="row"></th>
+        <td>{{file.name}}</td>
+        <td>{{file.desc}}</td>
+        <td  ><img src="http://localhost:3000/{{file.image}}" style="height: 50px; width: 50px;"></td>
+        <td ><button (click)="fileplay(file)">Play Song</button></td>
+        <td ><button (click)="pause()">Pause</button></td>
+        <td ><button (click)="deleteSong(file)">Delete</button></td>
+        <td > <button (click)="editSong(file)">Update</button></td>
+       
+      </tr>
+      
+    </tbody>
+  </table>
+  
+  <!-- <mat-paginator [length]="100"
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  aria-label="Select page">
+</mat-paginator> -->
+
+<!-- //////////////////////listing /////////////////
+<ul *ngFor="let file of files"  >
+    <li >{{file.name}}<button (click)="fileplay(file)">Play Song</button>
+        <button (click)="pause()">Pause</button>
+        <button (click)="deleteSong(file)">Delete</button>
+        <button (click)="updateSong(file)">Update</button>
+     </li>
+</ul> -->
+
+
+<div style=" margin-left: 30%;"  [hidden]="showadd">
+    <div>
+        <h1>Add Song</h1>
+    </div>
+    <form [formGroup]="addForm" (ngSubmit)="addsong()" >
+  <input type="text"  placeholder="name"  formControlName="name"/><br/><br/>
+  <textarea type="text"  placeholder="des"  formControlName="desc"></textarea><br/><br/>
+  <input type="file"  (change)="selectImage($event)"  /><br/><br/>
+  <input type="file"  (change)="selectFile($event)" /><br/><br/>
+  <button  type="submit" class="btn btn-primary"  >Add Song</button>
+  <button  [hidden]="showUpdate" type="submit" class="btn btn-primary"  >Update</button>
+  
+    </form>
+
+</div>
+<div style=" margin-left: 30%;" [hidden]="showUpdate">
+    <div>
+        <h1>Update Song</h1>
+    </div>
+    <form [formGroup]="updateForm" (ngSubmit)="updateSong()" >
+  <input type="text"  placeholder="name"  formControlName="editname"/><br/><br/>
+  <textarea type="text"  placeholder="des"  formControlName="editdesc"></textarea><br/><br/>
+  <input type="file"  (change)="selectImage($event)"  /><br/><br/>
+  <input type="file"  (change)="selectFile($event)" /><br/><br/>
+  
+  <button   type="submit" class="btn btn-primary"  >Update</button>
+  
+    </form>
+
+</div>
+
+
+<!-- <h1>UPLOAD</h1>
+<div> 
+    <input type="file"  (change)="selectFile($event)" />
+    <button (click)="submit()">Submit</button>
+</div> -->
+
+
+
+
+
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
